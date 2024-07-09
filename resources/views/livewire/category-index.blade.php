@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <input type="text" id="squareText" class="form-control square" placeholder="Search">
+                            <input type="text" wire:model.debounce.300ms="search" id="squareText" class="form-control square" placeholder="Search">
                         </div>
                         <div class="col-4">
                             <div class="button d-flex justify-content-end">
@@ -41,6 +41,13 @@
                             </div>
                         </div>
                     </div>
+                    @if (session()->has('success'))
+                        <br>
+                        <div class="alert alert-success alert-dismissible show fade">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-lg">
                             <thead>
@@ -52,16 +59,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse ($categories as $category)
                                 <tr>
-                                    <td class="text-bold-500">1</td>
-                                    <td>Pengumuman</td>
-                                    <td class="text-bold-500">Deskripsi untuk pengumuman</td>
+                                    <td class="text-bold-500">{{$category->id}}</td>
+                                    <td>{{$category->name}}</td>
+                                    <td class="text-bold-500">{{$category->description}}</td>
                                     <td class="text-bold-500">
                                         {{-- <a href="#" class="btn icon btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Detail Category"><i class="bi bi-info-circle"></i></a> --}}
-                                        <a wire:click="update()" class="btn icon btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Update Category"><i class="bi bi-pencil"></i></a>
-                                        <a href="#" class="btn icon btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Category"><i class="bi bi-x"></i></a>
+                                        <a wire:click="edit({{$category->id}})" class="btn icon btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Update Category"><i class="bi bi-pencil"></i></a>
+                                        <a wire:click="destroy({{$category->id}})" wire:confirm="Are you sure?" class="btn icon btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Category"><i class="bi bi-x"></i></a>
                                     </td>
                                 </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="4" align="center">Data Not found!</td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -99,6 +112,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <form wire:submit.prevent="store">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group row align-items-center">
@@ -106,17 +120,23 @@
                                         <label class="col-form-label" for="category-name">Category Name</label>
                                     </div>
                                     <div class="col-lg-4 col-8">
-                                        <input type="text" id="category-name" class="form-control" name="cname" placeholder="Category Name">
+                                        <input type="text" id="category-name" wire:model="name" class="form-control" name="cname" placeholder="Category Name">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group row align-items-center">
                                     <div class="col-lg-2 col-4">
-                                        <label class="col-form-label" for="category-name">Description</label>
+                                        <label class="col-form-label" for="description">Description</label>
                                     </div>
                                     <div class="col-lg-10 col-8">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        <textarea class="form-control" wire:model="description" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -124,10 +144,11 @@
                                 <br>
                                 <div class="buttons">
                                     <a wire:click="back()" class="btn btn-outline-primary">Back</a>
-                                    <a href="#" class="btn btn-outline-success">Save</a>
+                                    <button class="submit btn btn-outline-success">Save</button>
                                 </div>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -163,6 +184,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
+                        <form wire:submit.prevent="update()">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group row align-items-center">
@@ -170,7 +192,10 @@
                                         <label class="col-form-label" for="category-name">Category Name</label>
                                     </div>
                                     <div class="col-lg-4 col-8">
-                                        <input type="text" id="category-name" class="form-control" name="cname" placeholder="Category Name">
+                                        <input type="text" wire:model="name" id="category-name" class="form-control" name="cname">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +205,10 @@
                                         <label class="col-form-label" for="category-name">Description</label>
                                     </div>
                                     <div class="col-lg-10 col-8">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        <textarea class="form-control" wire:model="description" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                        @error('description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -188,10 +216,11 @@
                                 <br>
                                 <div class="buttons">
                                     <a wire:click="back()" class="btn btn-outline-primary">Back</a>
-                                    <a href="#" class="btn btn-outline-success">Save</a>
+                                    <button class="submit btn btn-outline-success">Save</button>
                                 </div>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
