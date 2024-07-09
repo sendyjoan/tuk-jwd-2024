@@ -57,8 +57,8 @@
                                     <td>Pengumuman</td>
                                     <td class="text-bold-500">Deskripsi untuk pengumuman</td>
                                     <td class="text-bold-500">
-                                        <a href="#" class="btn icon btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Detail Category"><i class="bi bi-info-circle"></i></a>
-                                        <a href="#" class="btn icon btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Update Category"><i class="bi bi-pencil"></i></a>
+                                        {{-- <a href="#" class="btn icon btn-outline-info" data-toggle="tooltip" data-placement="bottom" title="Detail Category"><i class="bi bi-info-circle"></i></a> --}}
+                                        <a wire:click="update()" class="btn icon btn-outline-warning" data-toggle="tooltip" data-placement="bottom" title="Update Category"><i class="bi bi-pencil"></i></a>
                                         <a href="#" class="btn icon btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete Category"><i class="bi bi-x"></i></a>
                                     </td>
                                 </tr>
@@ -81,8 +81,8 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Create Category</h3>
-                    <p class="text-subtitle text-muted">The following are categories that can be used to label letters.<br>
-                        Click "Add Data" to add new data.</p>
+                    <p class="text-subtitle text-muted">Page for adding mail category data.<br>
+                        When finished, don't forget to click the "Save" button.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -95,6 +95,107 @@
                 </div>
             </div>
         </div>
+        <section>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row align-items-center">
+                                    <div class="col-lg-2 col-4">
+                                        <label class="col-form-label" for="category-name">Category Name</label>
+                                    </div>
+                                    <div class="col-lg-4 col-8">
+                                        <input type="text" id="category-name" class="form-control" name="cname" placeholder="Category Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row align-items-center">
+                                    <div class="col-lg-2 col-4">
+                                        <label class="col-form-label" for="category-name">Description</label>
+                                    </div>
+                                    <div class="col-lg-10 col-8">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                                <div class="buttons">
+                                    <a wire:click="back()" class="btn btn-outline-primary">Back</a>
+                                    <a href="#" class="btn btn-outline-success">Save</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    @endif
+    @if($isUpdate)
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Update Category</h3>
+                    <p class="text-subtitle text-muted">Page for changing mail category data.<br>
+                        When finished, don't forget to click the "Save" button.</p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="categories">Category</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Update Category</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row align-items-center">
+                                    <div class="col-lg-2 col-4">
+                                        <label class="col-form-label" for="category-name">Category Name</label>
+                                    </div>
+                                    <div class="col-lg-4 col-8">
+                                        <input type="text" id="category-name" class="form-control" name="cname" placeholder="Category Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group row align-items-center">
+                                    <div class="col-lg-2 col-4">
+                                        <label class="col-form-label" for="category-name">Description</label>
+                                    </div>
+                                    <div class="col-lg-10 col-8">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <br>
+                                <div class="buttons">
+                                    <a wire:click="back()" class="btn btn-outline-primary">Back</a>
+                                    <a href="#" class="btn btn-outline-success">Save</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     @endif
 </div>
