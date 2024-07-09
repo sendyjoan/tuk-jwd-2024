@@ -48,8 +48,8 @@
                     </a>
                 </li>
                 <li
-                    class="sidebar-item  ">
-                    <a href="#" class='sidebar-link'>
+                    class="sidebar-item {{ request()->routeIs('letter') ? 'active' : '' }}">
+                    <a href="{{ route('letter') }}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Letter Archives</span>
                     </a>

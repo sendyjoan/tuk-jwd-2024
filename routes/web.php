@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\AboutIndex;
+use App\Livewire\LetterIndex;
 use App\Livewire\CategoryIndex;
 use App\Livewire\DashboardIndex;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ Route::get('/', function () {
 Route::get('/dashboard', DashboardIndex::class)->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/about', AboutIndex::class)->middleware(['auth', 'verified'])->name('about');
 Route::get('/categories', CategoryIndex::class)->middleware(['auth', 'verified'])->name('category');
+Route::get('/letters', LetterIndex::class)->middleware(['auth', 'verified'])->name('letter');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
