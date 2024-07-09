@@ -17,17 +17,21 @@ class CategoryIndex extends Component
 
     public function render()
     {
-        // $params = [
-        //     'search' => $this->search
-        // ];
+        $params = [
+            'search' => $this->search
+        ];
 
-        // $categories = Category::when($params['search'], function ($query) use ($params) {
-        //     $query->where('name', 'like', '%' . $params['search'] . '%');
-        // })->get();
+        $categories = Category::when($params['search'], function ($query) use ($params) {
+            $query->where('name', 'like', '%' . $params['search'] . '%');
+        })->get();
 
-        return view('livewire.category-index', [
-            'categories' => Category::where('name', 'like', '%' . $this->search . '%')->get()
-        ]);
+        return view('livewire.category-index', compact('categories'));
+    }
+
+    public function fresh(){
+        $this->home = true;
+        $this->isCreate = false;
+        $this->isUpdate = false;
     }
 
     public function back()

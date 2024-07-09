@@ -33,7 +33,14 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <input type="text" wire:model.debounce.300ms="search" id="squareText" class="form-control square" placeholder="Search">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" wire:model="search" id="squareText" class="form-control square" placeholder="Search">
+                                </div>
+                                <div class="col-6">
+                                    <a wire:click="fresh()" class="btn btn-outline-info">Search</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-4">
                             <div class="button d-flex justify-content-end">
