@@ -58,6 +58,7 @@ class LetterIndex extends Component
         $this->isCreate = false;
         $this->isUpdate = true;
         $this->isDetail = false;
+        $this->file = null;
 
         $letter = Letter::findOrFail($id);
         $this->selectedCategory = $letter->category_id;

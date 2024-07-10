@@ -256,6 +256,7 @@
                                     <div class="buttons">
                                         <a wire:click="back()" class="btn btn-outline-primary">Back</a>
                                         <a wire:click="download()" class="btn btn-outline-success">Download</a>
+                                        <a wire:click="ubah({{$id}})" class="btn btn-outline-warning">Update</a>
                                     </div>
                                 </div>
                             </div>
