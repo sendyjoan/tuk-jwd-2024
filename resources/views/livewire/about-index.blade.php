@@ -27,6 +27,7 @@
                     <div class="d-flex justify-content-center align-items-center flex-column">
                         <div class="avatar avatar-2xl">
                             <img src="{{asset('assets/compiled/jpg/8.jpg')}}" style="width: 250px; height:250px" alt="Avatar">
+                            {{-- <img src="{{asset('assets/compiled/jpg/creator.jpeg')}}" style="width: 250px; height:250px" alt="Avatar"> --}}
                         </div>
                         <h3 class="mt-3">Sendy Joan Kevin</h3>
                         <p class="text-small">D-IV Teknik Informatika</p>
